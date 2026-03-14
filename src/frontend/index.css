@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark academic navy + electric cyan */
+    --background: 0.1 0.022 255;
+    --foreground: 0.94 0.012 255;
+    --card: 0.14 0.028 255;
+    --card-foreground: 0.94 0.012 255;
+    --popover: 0.14 0.028 255;
+    --popover-foreground: 0.94 0.012 255;
+    --primary: 0.72 0.22 200;
+    --primary-foreground: 0.08 0.015 255;
+    --secondary: 0.2 0.035 255;
+    --secondary-foreground: 0.94 0.012 255;
+    --muted: 0.22 0.03 255;
+    --muted-foreground: 0.6 0.04 255;
+    --accent: 0.72 0.22 200;
+    --accent-foreground: 0.08 0.015 255;
+    --destructive: 0.6 0.22 25;
+    --destructive-foreground: 0.98 0.01 0;
+    --border: 0.26 0.04 255;
+    --input: 0.22 0.03 255;
+    --ring: 0.72 0.22 200;
+    --radius: 0.625rem;
+    --chart-1: 0.72 0.22 200;
+    --chart-2: 0.65 0.2 160;
+    --chart-3: 0.75 0.18 290;
+    --chart-4: 0.7 0.22 55;
+    --chart-5: 0.65 0.22 330;
+    --sidebar: 0.12 0.025 255;
+    --sidebar-foreground: 0.94 0.012 255;
+    --sidebar-primary: 0.72 0.22 200;
+    --sidebar-primary-foreground: 0.08 0.015 255;
+    --sidebar-accent: 0.2 0.035 255;
+    --sidebar-accent-foreground: 0.94 0.012 255;
+    --sidebar-border: 0.26 0.04 255;
+    --sidebar-ring: 0.72 0.22 200;
+    /* Semantic score colors */
+    --score-high: 0.68 0.22 160;
+    --score-mid: 0.72 0.22 55;
+    --score-low: 0.62 0.22 25;
+    --accept-color: 0.68 0.22 160;
+    --weak-accept-color: 0.72 0.22 140;
+    --borderline-color: 0.72 0.18 55;
+    --weak-reject-color: 0.68 0.2 35;
+    --reject-color: 0.6 0.22 25;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "ss01", "cv01";
+  }
+}
+
+/* Grid pattern background */
+.bg-grid {
+  background-image:
+    linear-gradient(oklch(0.72 0.22 200 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.72 0.22 200 / 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glow effects */
+.glow-cyan {
+  box-shadow: 0 0 20px oklch(0.72 0.22 200 / 0.15), 0 0 60px oklch(0.72 0.22 200 / 0.05);
+}
+
+.glow-cyan-sm {
+  box-shadow: 0 0 10px oklch(0.72 0.22 200 / 0.2);
+}
+
+/* Gradient borders */
+.border-gradient {
+  border: 1px solid;
+  border-image: linear-gradient(135deg, oklch(0.72 0.22 200 / 0.6), oklch(0.72 0.22 200 / 0.1)) 1;
+}
+
+/* Score ring colors */
+.score-ring-high { stroke: oklch(var(--score-high)); }
+.score-ring-mid { stroke: oklch(var(--score-mid)); }
+.score-ring-low { stroke: oklch(var(--score-low)); }
+
+/* Glass card */
+.glass-card {
+  background: oklch(0.16 0.028 255 / 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.26 0.04 255 / 0.6);
+}
+
+/* Radar chart custom fill */
+.recharts-radar-polygon {
+  fill: oklch(0.72 0.22 200 / 0.1) !important;
+  stroke: oklch(0.72 0.22 200 / 0.8) !important;
+}
