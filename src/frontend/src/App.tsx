@@ -1,66 +1,72 @@
-import { Toaster } from "@/components/ui/sonner";
-import {
-  Outlet,
-  RouterProvider,
-  createRootRoute,
-  createRoute,
-  createRouter,
-} from "@tanstack/react-router";
-import { NavBar } from "./components/NavBar";
-import { HistoryPage } from "./pages/HistoryPage";
-import { HomePage } from "./pages/HomePage";
-import { ResultsPage } from "./pages/ResultsPage";
-import { UploadPage } from "./pages/UploadPage";
+import { useCallback, useState } from "react";
+import { Game } from "./components/Game";
+import { GameOver } from "./components/GameOver";
+import { Lobby } from "./components/Lobby";
 
-const rootRoute = createRootRoute({
-  component: () => (
-    <div className="min-h-screen bg-background">
-      <NavBar />
-      <Outlet />
-      <Toaster theme="dark" />
-    </div>
-  ),
-});
+type Phase = "lobby" | "playing" | "gameover";
 
-const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/",
-  component: HomePage,
-});
-
-const uploadRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/upload",
-  component: UploadPage,
-});
-
-const resultsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/results/$paperId",
-  component: ResultsPage,
-});
-
-const historyRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/history",
-  component: HistoryPage,
-});
-
-const routeTree = rootRoute.addChildren([
-  indexRoute,
-  uploadRoute,
-  resultsRoute,
-  historyRoute,
-]);
-
-const router = createRouter({ routeTree });
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
+interface GameResult {
+  kills: number;
+  time: number;
+  won: boolean;
 }
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  const [phase, setPhase] = useState<Phase>("lobby");
+  const [result, setResult] = useState<GameResult>({
+    kills: 0,
+    time: 0,
+    won: false,
+  });
+  const [gameKey, setGameKey] = useState(0);
+
+  const handlePlay = useCallback(() => {
+    setGameKey((k) => k + 1);
+    setPhase("playing");
+  }, []);
+
+  const handleGameOver = useCallback(
+    (kills: number, time: number, won: boolean) => {
+      const r = { kills, time, won };
+      setResult(r);
+      setPhase("gameover");
+
+      // Save score to localStorage
+      const scores = JSON.parse(
+        localStorage.getItem("battlegrounds_scores") || "[]",
+      ) as Array<GameResult & { date: string }>;
+      scores.push({ ...r, date: new Date().toISOString() });
+      scores.sort((a, b) => b.kills - a.kills);
+      localStorage.setItem(
+        "battlegrounds_scores",
+        JSON.stringify(scores.slice(0, 10)),
+      );
+    },
+    [],
+  );
+
+  const handlePlayAgain = useCallback(() => {
+    setGameKey((k) => k + 1);
+    setPhase("playing");
+  }, []);
+
+  const handleBackToLobby = useCallback(() => {
+    setPhase("lobby");
+  }, []);
+
+  return (
+    <>
+      {phase === "lobby" && <Lobby onPlay={handlePlay} />}
+      {phase === "playing" && (
+        <Game key={gameKey} onGameOver={handleGameOver} />
+      )}
+      {phase === "gameover" && (
+        <GameOver
+          result={result}
+          onPlayAgain={handlePlayAgain}
+          onBackToLobby={handleBackToLobby}
+        />
+      )}
+    </>
+  );
 }

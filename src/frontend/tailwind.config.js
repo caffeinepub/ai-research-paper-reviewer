@@ -10,13 +10,12 @@ export default {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      screens: { "2xl": "1400px" },
     },
     extend: {
       fontFamily: {
-        display: ["DM Serif Display", "Georgia", "serif"],
+        display: ["Orbitron", "system-ui", "sans-serif"],
+        heading: ["Rajdhani", "system-ui", "sans-serif"],
         sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Menlo", "monospace"],
       },
@@ -79,7 +78,9 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
-        glow: "0 0 20px oklch(0.72 0.22 200 / 0.15)",
+        "glow-orange": "0 0 20px rgba(242, 162, 58, 0.4)",
+        "glow-blue": "0 0 20px rgba(87, 184, 255, 0.4)",
+        "glow-red": "0 0 20px rgba(196, 58, 46, 0.4)",
       },
       keyframes: {
         "accordion-down": {
@@ -92,18 +93,27 @@ export default {
         },
         "pulse-glow": {
           "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.6" },
+          "50%": { opacity: "0.5" },
         },
-        "spin-slow": {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
+        "zone-pulse": {
+          "0%, 100%": { boxShadow: "0 0 10px rgba(87,184,255,0.4)" },
+          "50%": { boxShadow: "0 0 25px rgba(87,184,255,0.8)" },
+        },
+        flicker: {
+          "0%, 100%": { opacity: "1" },
+          "92%": { opacity: "1" },
+          "93%": { opacity: "0.7" },
+          "94%": { opacity: "1" },
+          "96%": { opacity: "0.8" },
+          "97%": { opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "spin-slow": "spin-slow 3s linear infinite",
+        "zone-pulse": "zone-pulse 2s ease-in-out infinite",
+        flicker: "flicker 4s linear infinite",
       },
     },
   },

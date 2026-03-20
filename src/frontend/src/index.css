@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0.13 0.012 160;
+    --foreground: 0.94 0.005 175;
+    --card: 0.17 0.01 160;
+    --card-foreground: 0.94 0.005 175;
+    --popover: 0.15 0.01 160;
+    --popover-foreground: 0.94 0.005 175;
+    --primary: 0.76 0.14 68;
+    --primary-foreground: 0.1 0.005 160;
+    --secondary: 0.22 0.008 160;
+    --secondary-foreground: 0.94 0.005 175;
+    --muted: 0.22 0.008 160;
+    --muted-foreground: 0.58 0.01 170;
+    --accent: 0.72 0.13 240;
+    --accent-foreground: 0.1 0.005 160;
+    --destructive: 0.45 0.18 25;
+    --destructive-foreground: 0.94 0.005 175;
+    --border: 0.25 0.012 160;
+    --input: 0.22 0.008 160;
+    --ring: 0.76 0.14 68;
+    --radius: 0.2rem;
+    --chart-1: 0.76 0.14 68;
+    --chart-2: 0.72 0.13 240;
+    --chart-3: 0.45 0.18 25;
+    --chart-4: 0.6 0.15 140;
+    --chart-5: 0.55 0.12 80;
+    --sidebar: 0.15 0.01 160;
+    --sidebar-foreground: 0.94 0.005 175;
+    --sidebar-primary: 0.76 0.14 68;
+    --sidebar-primary-foreground: 0.1 0.005 160;
+    --sidebar-accent: 0.22 0.008 160;
+    --sidebar-accent-foreground: 0.94 0.005 175;
+    --sidebar-border: 0.25 0.012 160;
+    --sidebar-ring: 0.76 0.14 68;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border box-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Rajdhani", "Plus Jakarta Sans", system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Orbitron", system-ui, sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  .font-orbitron {
+    font-family: "Orbitron", system-ui, sans-serif;
+  }
+  .font-rajdhani {
+    font-family: "Rajdhani", system-ui, sans-serif;
+  }
+  .glow-orange {
+    box-shadow: 0 0 18px rgba(242, 162, 58, 0.45);
+  }
+  .glow-blue {
+    box-shadow: 0 0 18px rgba(87, 184, 255, 0.45);
+  }
+  .text-glow-orange {
+    text-shadow: 0 0 12px rgba(242, 162, 58, 0.7);
+  }
+  .text-glow-blue {
+    text-shadow: 0 0 12px rgba(87, 184, 255, 0.7);
+  }
+  .scanline {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.05) 2px,
+      rgba(0, 0, 0, 0.05) 4px
+    );
+  }
+}
